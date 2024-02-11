@@ -352,8 +352,11 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  return Array.from(
+    { length: Math.ceil(arr.length / chunkSize) },
+    (element, index) => arr.slice(index * chunkSize, (index + 1) * chunkSize)
+  );
 }
 
 /**
@@ -463,8 +466,10 @@ function getIndicesOfOddNumbers(numbers) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  return arr.map((element) =>
+    element.toString(16).padStart(7, '#000000').toUpperCase()
+  );
 }
 
 /**
@@ -575,8 +580,20 @@ function shiftArray(arr, n) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const arrNumber = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  return arr.sort((a, b) => arrNumber.indexOf(a) - arrNumber.indexOf(b));
 }
 
 /**
@@ -598,8 +615,23 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  let newArr = [];
+  if (arr.length === 1) {
+    newArr = arr;
+  }
+  if (arr.length % 2 === 0) {
+    newArr = arr
+      .slice(-Math.floor(arr.length / 2))
+      .concat(arr.slice(0, 0 - Math.ceil(arr.length / 2)));
+  }
+  if (arr.length > 1 && arr.length % 2 !== 0) {
+    newArr = arr
+      .slice(-Math.floor(arr.length / 2))
+      .concat(arr[Math.floor(arr.length / 2)])
+      .concat(arr.slice(0, 0 - Math.ceil(arr.length / 2)));
+  }
+  return newArr;
 }
 
 module.exports = {
